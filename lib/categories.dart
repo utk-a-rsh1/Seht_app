@@ -26,7 +26,6 @@ class _CategoriesState extends State<Categories> {
         'https://via.placeholder.com/600x300',
       ],
     },
-    // Add more doctors if needed
   ];
 
   @override

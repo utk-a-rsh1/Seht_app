@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,91 +12,174 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CategoriesScreen(),
+      home: MainScreen(),
     );
   }
 }
 
-class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+class MainScreen extends StatelessWidget {
+  const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const CustomAppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Stack(
-          children: [
-            TextField(
-              cursorColor: Colors.black,
-              style: const TextStyle(fontSize: 14),
-              decoration: InputDecoration(
-                hintText: 'Search',
-                hintStyle: const TextStyle(fontSize: 14, color: Colors.grey),
-                isDense: true,
-                contentPadding: const EdgeInsets.fromLTRB(48, 28, 12, 12),
-                prefixIcon: const Padding(
-                  padding: EdgeInsets.only(left: 12, right: 8),
-                  child: Icon(Icons.search, size: 20, color: Colors.grey),
-                ),
-                prefixIconConstraints: const BoxConstraints(
-                  minWidth: 40,
-                  minHeight: 40,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                  borderSide: BorderSide(color: Color(0xffE4E4E4), width: 1.5),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                  borderSide: BorderSide(color: Color(0xffE4E4E4), width: 1.5),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // App Bar
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Icon(Icons.close),
+                    const Text(
+                      "Find doctors",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(width: 24),
+                  ],
                 ),
               ),
-            ),
-            const Positioned(
-              left: 48,
-              top: 8,
-              child: Text(
-                'Location',
-                style: TextStyle(fontSize: 11, color: Colors.grey),
+
+              // Location bar
+              Container(
+                width: double.infinity,
+                color: const Color(0xFF003F7D),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 16,
+                ),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.location_on,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 8),
+                    const Expanded(
+                      child: Text(
+                        "Chandigarh, India | Sector 26, main market",
+                        style: TextStyle(color: Colors.white, fontSize: 14),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    const Text(
+                      "Change",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.asset(
+                        'assets/images/doctor_patient.jpg', // Replace with your image path
+                        width: double.infinity,
+                        height: 200,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(24),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.shade200,
+                            blurRadius: 6,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: "Search for Doctors, Symptoms etc.",
+                          prefixIcon: const Icon(Icons.search),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 14,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
 
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+              const SizedBox(height: 24),
 
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0,
-      leading: Padding(
-        padding: const EdgeInsets.all(12),
-        child: GestureDetector(
-          onTap: () => Navigator.pop(context),
-          child: Container(
-            padding: const EdgeInsets.all(6),
-            decoration: BoxDecoration(
-              border: Border.all(color: Color(0xffE4E4E4), width: 1),
-              borderRadius: BorderRadius.circular(8),
-              color: Colors.white,
-            ),
-            child: const Icon(
-              Icons.arrow_back_ios,
-              size: 16,
-              color: Color(0xff133051),
-            ),
+              // Top-searched Specialities
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: const Text(
+                  "Top-searched specialities",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Wrap(
+                  spacing: 16,
+                  runSpacing: 16,
+                  children: [
+                    for (var item in [
+                      {'icon': Icons.star, 'label': 'Best picks'},
+                      {'icon': Icons.person, 'label': 'Physician'},
+                      {'icon': Icons.medical_services, 'label': 'Dentist'},
+                      {'icon': Icons.local_dining, 'label': 'Nutritionist'},
+                      {'icon': Icons.favorite, 'label': 'Sexologist'},
+                      {'icon': Icons.psychology, 'label': 'Psychologist'},
+                    ])
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade100,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Icon(
+                              item['icon'] as IconData,
+                              size: 32,
+                              color: Colors.blueAccent,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            item['label'] as String,
+                            style: const TextStyle(fontSize: 14),
+                          ),
+                        ],
+                      ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 32),
+            ],
           ),
         ),
       ),

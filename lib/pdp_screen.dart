@@ -104,7 +104,6 @@ class _PDPScreenState extends State<PDPScreen> {
                       doctor['description'],
                       style: const TextStyle(fontSize: 16),
                     ),
-                    // Add more content here
                   ],
                 ),
               ),
