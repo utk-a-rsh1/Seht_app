@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'pdp_screen.dart';
 
 class Categories extends StatefulWidget {
   const Categories({super.key});
@@ -11,226 +10,312 @@ class Categories extends StatefulWidget {
 class _CategoriesState extends State<Categories> {
   int selectedCategory = 0;
 
+  final List<Map<String, dynamic>> categories = [
+    {'icon': Icons.star, 'label': 'Best picks'},
+    {'icon': Icons.person, 'label': 'Physician'},
+    {'icon': Icons.medical_services, 'label': 'Dentist'},
+    {'icon': Icons.local_dining, 'label': 'Nutritionist'},
+    {'icon': Icons.favorite, 'label': 'Sexologist'},
+    {'icon': Icons.psychology, 'label': 'Psychologist'},
+  ];
+
   final List<Map<String, dynamic>> doctors = [
     {
-      'name': 'Dr. Priya Sharma',
-      'specialty': 'Cardiologist',
-      'rating': 4.8,
-      'location': 'Delhi, India',
-      'timing': 'Mon - Fri, 10 AM - 4 PM',
-      'description': 'Experienced cardiologist with 10+ years of practice.',
-      'images': [
-        'https://via.placeholder.com/600x300',
-        'https://via.placeholder.com/600x300',
-        'https://via.placeholder.com/600x300',
-        'https://via.placeholder.com/600x300',
-      ],
+      'name': 'Sukh sadan clinic',
+      'image': 'assets/images/doctor1.jpg',
+      'distance': '1km',
+      'time': '10 min away',
+      'rating': '4.8',
+      'location': 'Jaypee Pavilion Court 1, Pavilion Heights Block Pt-1, Noida',
+    },
+    {
+      'name': 'Dr. Alan Hathaway',
+      'image': 'assets/images/doctor2.jpg',
+      'distance': '1km',
+      'time': '10 min away',
+      'rating': '4.8',
+      'location': 'Jaypee Pavilion Court 1, Pavilion Heights Block Pt-1, Noida',
+    },
+    {
+      'name': 'Dr. Mithun Hastir Clinic',
+      'image': 'assets/images/doctor3.jpg',
+      'distance': '1km',
+      'time': '10 min away',
+      'rating': '4.8',
+      'location': 'Jaypee Pavilion Court 1, Pavilion Heights Block Pt-1, Noida',
+    },
+    {
+      'name': 'Dr. Deoz clinic',
+      'image': 'assets/images/doctor_patient.jpg',
+      'distance': '1km',
+      'time': '10 min away',
+      'rating': '4.8',
+      'location': 'Jaypee Pavilion Court 1, Pavilion Heights Block Pt-1, Noida',
     },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            backgroundColor: Colors.white,
-            floating: true,
-            pinned: true,
-            expandedHeight: 120,
-            flexibleSpace: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Container(
+              color: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Color(0xffE4E4E4)),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.arrow_back, size: 24),
                   ),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.arrow_back, color: Colors.black),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(10),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Heart pain',
+                        hintStyle: const TextStyle(fontSize: 14),
+                        filled: true,
+                        fillColor: Colors.white,
+                        prefixIcon: const Icon(Icons.search),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                        ),
+
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(
+                            color: Color(0xffE4E4E4),
                           ),
-                          child: const Row(
-                            children: [
-                              Icon(Icons.search, color: Colors.grey),
-                              SizedBox(width: 8),
-                              Text(
-                                'Search doctors',
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                            ],
-                          ),
+                        ),
+
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
                         ),
                       ),
-                      const SizedBox(width: 8),
-                      const Icon(Icons.filter_list, color: Colors.black),
-                    ],
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 80,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.only(left: 16),
-                    itemCount: 5,
-                    itemBuilder: (context, index) {
-                      bool isSelected = index == selectedCategory;
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectedCategory = index;
-                          });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: Column(
-                            children: [
-                              CircleAvatar(
-                                radius: 25,
-                                backgroundColor: Colors.grey[300],
-                                child: Icon(Icons.local_hospital),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                'Category ${index + 1}',
-                                style: TextStyle(
-                                  color: isSelected
-                                      ? Colors.black
-                                      : Colors.grey,
-                                  fontWeight: isSelected
-                                      ? FontWeight.bold
-                                      : FontWeight.normal,
-                                ),
-                              ),
-                              if (isSelected)
-                                Container(
-                                  margin: const EdgeInsets.only(top: 4),
-                                  height: 3,
-                                  width: 20,
-                                  color: Colors.black,
-                                ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
+                  const SizedBox(width: 12),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Color(0xffE4E4E4)),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.filter_list, size: 24),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-              child: Text(
-                'Results for Category ${selectedCategory + 1}',
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+
+            Container(
+              color: Colors.white,
+              child: SizedBox(
+                height: 80,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  itemCount: categories.length,
+                  itemBuilder: (context, index) {
+                    final item = categories[index];
+                    final isSelected = selectedCategory == index;
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() => selectedCategory = index);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          children: [
+                            Icon(
+                              item['icon'],
+                              size: 35,
+                              color: isSelected
+                                  ? Colors.blueAccent
+                                  : const Color.fromARGB(67, 68, 137, 255),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              item['label'],
+                              style: TextStyle(
+                                fontWeight: isSelected
+                                    ? FontWeight.w600
+                                    : FontWeight.normal,
+                              ),
+                            ),
+                            if (isSelected)
+                              Container(
+                                margin: const EdgeInsets.only(top: 4),
+                                height: 2,
+                                width: 35,
+                                color: Colors.black,
+                              ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(childCount: doctors.length, (
-              context,
-              index,
-            ) {
-              final doctor = doctors[index];
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => PDPScreen(doctor: doctor),
-                    ),
-                  );
-                },
-                child: Card(
-                  margin: const EdgeInsets.all(16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+            Container(
+              width: double.infinity,
+              color: Colors.grey[100],
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 16,
+              ),
+              child: const Text(
+                'Results for “heart pain”',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+
+            // Grey container starts from here
+            Expanded(
+              child: Container(
+                decoration: const BoxDecoration(color: Color(0xffF2F3F7)),
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 0,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
+                  children: [
+                    ...doctors.map((doc) {
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 24),
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundColor: Colors.grey[300],
-                            ),
-                            const SizedBox(width: 12),
-                            Column(
+                            // Row: image + right side content
+                            Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  doctor['name'],
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                                // Doctor Image
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Image.asset(
+                                    doc['image'],
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (_, __, ___) => Container(
+                                      width: 80,
+                                      height: 80,
+                                      color: Colors.grey[300],
+                                      child: const Icon(
+                                        Icons.image_not_supported,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                                Text(
-                                  doctor['specialty'],
-                                  style: const TextStyle(color: Colors.grey),
+                                const SizedBox(width: 12),
+                                // Text info
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        doc['name'],
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 16),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            padding: const EdgeInsets.all(4),
+                                            decoration: BoxDecoration(
+                                              color: Color(0xffF2F3F7),
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
+                                            ),
+                                            child: const Icon(
+                                              Icons.location_on,
+                                              color: Colors.blueAccent,
+                                              size: 16,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 4),
+                                          Text(
+                                            '${doc['distance']} • ${doc['time']}',
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 16),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            padding: const EdgeInsets.all(4),
+                                            decoration: BoxDecoration(
+                                              color: Color(0xffF2F3F7),
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
+                                            ),
+                                            child: const Icon(
+                                              Icons.star,
+                                              color: Colors.blueAccent,
+                                              size: 16,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 8),
+                                          Text(
+                                            doc['rating'],
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                        const Divider(height: 24),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                const Icon(Icons.access_time, size: 16),
-                                const SizedBox(width: 4),
-                                Text(doctor['timing']),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                const Icon(Icons.location_on, size: 16),
-                                const SizedBox(width: 4),
-                                Text(doctor['location']),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.star,
-                                  size: 16,
-                                  color: Colors.orange,
-                                ),
-                                const SizedBox(width: 4),
-                                Text('${doctor['rating']}'),
-                              ],
+                            const SizedBox(height: 12),
+                            // Location line (full-width)
+                            Text(
+                              doc['location'],
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey,
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ],
                         ),
-                        const SizedBox(height: 12),
-                        Text(doctor['description']),
-                      ],
-                    ),
-                  ),
+                      );
+                    }).toList(),
+                    const SizedBox(height: 24),
+                  ],
                 ),
-              );
-            }),
-          ),
-        ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
