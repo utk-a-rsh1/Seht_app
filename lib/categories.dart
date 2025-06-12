@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'pdp_screen.dart';
 
 class Categories extends StatefulWidget {
   const Categories({super.key});
@@ -23,6 +24,12 @@ class _CategoriesState extends State<Categories> {
     {
       'name': 'Sukh sadan clinic',
       'image': 'assets/images/doctor1.jpg',
+      'images': [
+        'assets/images/doctor1.jpg',
+        'assets/images/doctor1.jpg',
+        'assets/images/doctor1.jpg',
+        'assets/images/doctor1.jpg',
+      ],
       'distance': '1km',
       'time': '10 min away',
       'rating': '4.8',
@@ -31,6 +38,12 @@ class _CategoriesState extends State<Categories> {
     {
       'name': 'Dr. Alan Hathaway',
       'image': 'assets/images/doctor2.jpg',
+      'images': [
+        'assets/images/doctor2.jpg',
+        'assets/images/doctor2.jpg',
+        'assets/images/doctor2.jpg',
+        'assets/images/doctor2.jpg',
+      ],
       'distance': '1km',
       'time': '10 min away',
       'rating': '4.8',
@@ -39,6 +52,12 @@ class _CategoriesState extends State<Categories> {
     {
       'name': 'Dr. Mithun Hastir Clinic',
       'image': 'assets/images/doctor3.jpg',
+      'images': [
+        'assets/images/doctor3.jpg',
+        'assets/images/doctor3.jpg',
+        'assets/images/doctor3.jpg',
+        'assets/images/doctor3.jpg',
+      ],
       'distance': '1km',
       'time': '10 min away',
       'rating': '4.8',
@@ -47,6 +66,12 @@ class _CategoriesState extends State<Categories> {
     {
       'name': 'Dr. Deoz clinic',
       'image': 'assets/images/doctor_patient.jpg',
+      'images': [
+        'assets/images/doctor_patient.jpg',
+        'assets/images/doctor_patient.jpg',
+        'assets/images/doctor_patient.jpg',
+        'assets/images/doctor_patient.jpg',
+      ],
       'distance': '1km',
       'time': '10 min away',
       'rating': '4.8',
@@ -87,14 +112,12 @@ class _CategoriesState extends State<Categories> {
                         contentPadding: const EdgeInsets.symmetric(
                           horizontal: 16,
                         ),
-
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(
                             color: Color(0xffE4E4E4),
                           ),
                         ),
-
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide.none,
@@ -115,7 +138,6 @@ class _CategoriesState extends State<Categories> {
                 ],
               ),
             ),
-
             Container(
               color: Colors.white,
               child: SizedBox(
@@ -182,8 +204,6 @@ class _CategoriesState extends State<Categories> {
                 ),
               ),
             ),
-
-            // Grey container starts from here
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(color: Color(0xffF2F3F7)),
@@ -194,118 +214,124 @@ class _CategoriesState extends State<Categories> {
                   ),
                   children: [
                     ...doctors.map((doc) {
-                      return Container(
-                        margin: const EdgeInsets.only(bottom: 24),
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Row: image + right side content
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Doctor Image
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(12),
-                                  child: Image.asset(
-                                    doc['image'],
-                                    width: 100,
-                                    height: 100,
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (_, __, ___) => Container(
-                                      width: 80,
-                                      height: 80,
-                                      color: Colors.grey[300],
-                                      child: const Icon(
-                                        Icons.image_not_supported,
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PDPScreen(doctor: doc),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 24),
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Image.asset(
+                                      doc['image'],
+                                      width: 100,
+                                      height: 100,
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (_, __, ___) => Container(
+                                        width: 80,
+                                        height: 80,
+                                        color: Colors.grey[300],
+                                        child: const Icon(
+                                          Icons.image_not_supported,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(width: 12),
-                                // Text info
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        doc['name'],
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          doc['name'],
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 16),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            padding: const EdgeInsets.all(4),
-                                            decoration: BoxDecoration(
-                                              color: Color(0xffF2F3F7),
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
+                                        const SizedBox(height: 16),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              padding: const EdgeInsets.all(4),
+                                              decoration: BoxDecoration(
+                                                color: Color(0xffF2F3F7),
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
+                                              ),
+                                              child: const Icon(
+                                                Icons.location_on,
+                                                color: Colors.blueAccent,
+                                                size: 16,
+                                              ),
                                             ),
-                                            child: const Icon(
-                                              Icons.location_on,
-                                              color: Colors.blueAccent,
-                                              size: 16,
+                                            const SizedBox(width: 4),
+                                            Text(
+                                              '${doc['distance']} • ${doc['time']}',
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                              ),
                                             ),
-                                          ),
-                                          const SizedBox(width: 4),
-                                          Text(
-                                            '${doc['distance']} • ${doc['time']}',
-                                            style: const TextStyle(
-                                              fontSize: 14,
+                                          ],
+                                        ),
+                                        const SizedBox(height: 16),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              padding: const EdgeInsets.all(4),
+                                              decoration: BoxDecoration(
+                                                color: Color(0xffF2F3F7),
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
+                                              ),
+                                              child: const Icon(
+                                                Icons.star,
+                                                color: Colors.blueAccent,
+                                                size: 16,
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 16),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            padding: const EdgeInsets.all(4),
-                                            decoration: BoxDecoration(
-                                              color: Color(0xffF2F3F7),
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
+                                            const SizedBox(width: 8),
+                                            Text(
+                                              doc['rating'],
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                              ),
                                             ),
-                                            child: const Icon(
-                                              Icons.star,
-                                              color: Colors.blueAccent,
-                                              size: 16,
-                                            ),
-                                          ),
-                                          const SizedBox(width: 8),
-                                          Text(
-                                            doc['rating'],
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 12),
-                            // Location line (full-width)
-                            Text(
-                              doc['location'],
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey,
+                                ],
                               ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
+                              const SizedBox(height: 12),
+                              Text(
+                                doc['location'],
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     }).toList(),
