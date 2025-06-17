@@ -62,6 +62,15 @@ flutter:
     - assets/images/doctor2.jpg
     - assets/images/doctor3.jpg
     - assets/images/map.jpg
+    - assets/icons/best.svg
+    - assets/icons/physician.svg
+    - assets/icons/Dentist.svg
+    - assets/icons/Nutri.svg
+    - assets/images/hosp1.jpg
+    - assets/images/hosp2.jpg
+    - assets/images/hosp3.jpg
+    - assets/images/hosp4.jpg
+    - assets/images/hosp5.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
