@@ -135,7 +135,6 @@ class _CategoriesState extends State<Categories> {
 
                 const SizedBox(height: 16),
 
-                // Categories bar
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8),
                   child: SizedBox(
@@ -360,3 +359,5 @@ class _CategoriesState extends State<Categories> {
     );
   }
 }
+
+//xoxo POMPI VEERE!!
