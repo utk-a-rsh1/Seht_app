@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'pdp_screen.dart';
 
 class Categories extends StatefulWidget {
   const Categories({super.key});
@@ -20,328 +19,177 @@ class _CategoriesState extends State<Categories> {
     {'icon': Icons.psychology, 'label': 'Psychologist'},
   ];
 
-  final List<Map<String, dynamic>> doctors = [
-    {
-      'name': 'Sukh sadan clinic',
-      'image': 'assets/images/doctor1.jpg',
-      'images': [
-        'assets/images/doctor1.jpg',
-        'assets/images/doctor1.jpg',
-        'assets/images/doctor1.jpg',
-        'assets/images/doctor1.jpg',
-      ],
-      'distance': '1km',
-      'time': '10 min away',
-      'rating': '4.8',
-      'location': 'Jaypee Pavilion Court 1, Pavilion Heights Block Pt-1, Noida',
-    },
-    {
-      'name': 'Dr. Alan Hathaway',
-      'image': 'assets/images/doctor2.jpg',
-      'images': [
-        'assets/images/doctor2.jpg',
-        'assets/images/doctor2.jpg',
-        'assets/images/doctor2.jpg',
-        'assets/images/doctor2.jpg',
-      ],
-      'distance': '1km',
-      'time': '10 min away',
-      'rating': '4.8',
-      'location': 'Jaypee Pavilion Court 1, Pavilion Heights Block Pt-1, Noida',
-    },
-    {
-      'name': 'Dr. Mithun Hastir Clinic',
-      'image': 'assets/images/doctor3.jpg',
-      'images': [
-        'assets/images/doctor3.jpg',
-        'assets/images/doctor3.jpg',
-        'assets/images/doctor3.jpg',
-        'assets/images/doctor3.jpg',
-      ],
-      'distance': '1km',
-      'time': '10 min away',
-      'rating': '4.8',
-      'location': 'Jaypee Pavilion Court 1, Pavilion Heights Block Pt-1, Noida',
-    },
-    {
-      'name': 'Dr. Deoz clinic',
-      'image': 'assets/images/doctor_patient.jpg',
-      'images': [
-        'assets/images/doctor_patient.jpg',
-        'assets/images/doctor_patient.jpg',
-        'assets/images/doctor_patient.jpg',
-        'assets/images/doctor_patient.jpg',
-      ],
-      'distance': '1km',
-      'time': '10 min away',
-      'rating': '4.8',
-      'location': 'Jaypee Pavilion Court 1, Pavilion Heights Block Pt-1, Noida',
-    },
-  ];
+  final List<Map<String, dynamic>> doctors = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              color: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-              child: Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Color(0xffE4E4E4)),
-                      borderRadius: BorderRadius.circular(8),
+      backgroundColor: const Color(0xffF2F3F7),
+      body: Column(
+        children: [
+          Container(
+            decoration: const BoxDecoration(color: Colors.white),
+            padding: EdgeInsets.only(left: 16, right: 16, top: 48, bottom: 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      height: 50,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: const Color(0xffE4E4E4)),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: const Icon(Icons.arrow_back),
                     ),
-                    child: const Icon(Icons.arrow_back, size: 24),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Heart pain',
-                        hintStyle: const TextStyle(fontSize: 14),
-                        filled: true,
-                        fillColor: Colors.white,
-                        prefixIcon: const Icon(Icons.search),
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                            color: Color(0xffE4E4E4),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none,
-                        ),
+                    const SizedBox(width: 12),
+                    const Text(
+                      "Find doctors",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.grey.shade300),
+                    borderRadius: BorderRadius.circular(40),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 12),
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Color(0xffE4E4E4)),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Icon(Icons.filter_list, size: 24),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              color: Colors.white,
-              child: SizedBox(
-                height: 80,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  itemCount: categories.length,
-                  itemBuilder: (context, index) {
-                    final item = categories[index];
-                    final isSelected = selectedCategory == index;
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() => selectedCategory = index);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Column(
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 16,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[100],
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: const Row(
                           children: [
                             Icon(
-                              item['icon'],
-                              size: 35,
-                              color: isSelected
-                                  ? Colors.blueAccent
-                                  : const Color.fromARGB(67, 68, 137, 255),
+                              Icons.location_on,
+                              color: Colors.grey,
+                              size: 18,
                             ),
-                            const SizedBox(height: 4),
+                            SizedBox(width: 4),
                             Text(
-                              item['label'],
+                              "Noida",
                               style: TextStyle(
-                                fontWeight: isSelected
-                                    ? FontWeight.w600
-                                    : FontWeight.normal,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
-                            if (isSelected)
-                              Container(
-                                margin: const EdgeInsets.only(top: 4),
-                                height: 2,
-                                width: 35,
-                                color: Colors.black,
-                              ),
                           ],
                         ),
                       ),
-                    );
-                  },
-                ),
-              ),
-            ),
-            Container(
-              width: double.infinity,
-              color: Colors.grey[100],
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 16,
-              ),
-              child: const Text(
-                'Results for “heart pain”',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            Expanded(
-              child: Container(
-                decoration: const BoxDecoration(color: Color(0xffF2F3F7)),
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 0,
-                  ),
-                  children: [
-                    ...doctors.map((doc) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PDPScreen(doctor: doc),
-                            ),
-                          );
-                        },
+                      const SizedBox(width: 10),
+                      Container(width: 1, height: 20, color: Color(0xffE4E4E4)),
+                      const SizedBox(width: 10),
+                      Expanded(
                         child: Container(
-                          margin: const EdgeInsets.only(bottom: 24),
-                          padding: const EdgeInsets.all(12),
+                          height: 50,
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: BorderRadius.circular(30),
                           ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(12),
-                                    child: Image.asset(
-                                      doc['image'],
-                                      width: 100,
-                                      height: 100,
-                                      fit: BoxFit.cover,
-                                      errorBuilder: (_, __, ___) => Container(
-                                        width: 80,
-                                        height: 80,
-                                        color: Colors.grey[300],
-                                        child: const Icon(
-                                          Icons.image_not_supported,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          doc['name'],
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 16),
-                                        Row(
-                                          children: [
-                                            Container(
-                                              padding: const EdgeInsets.all(4),
-                                              decoration: BoxDecoration(
-                                                color: Color(0xffF2F3F7),
-                                                borderRadius:
-                                                    BorderRadius.circular(4),
-                                              ),
-                                              child: const Icon(
-                                                Icons.location_on,
-                                                color: Colors.blueAccent,
-                                                size: 16,
-                                              ),
-                                            ),
-                                            const SizedBox(width: 4),
-                                            Text(
-                                              '${doc['distance']} • ${doc['time']}',
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 16),
-                                        Row(
-                                          children: [
-                                            Container(
-                                              padding: const EdgeInsets.all(4),
-                                              decoration: BoxDecoration(
-                                                color: Color(0xffF2F3F7),
-                                                borderRadius:
-                                                    BorderRadius.circular(4),
-                                              ),
-                                              child: const Icon(
-                                                Icons.star,
-                                                color: Colors.blueAccent,
-                                                size: 16,
-                                              ),
-                                            ),
-                                            const SizedBox(width: 8),
-                                            Text(
-                                              doc['rating'],
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 12),
-                              Text(
-                                doc['location'],
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
+                          child: Center(
+                            child: TextField(
+                              textAlignVertical: TextAlignVertical.center,
+                              decoration: InputDecoration(
+                                isDense: true,
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical: 14,
                                 ),
-                                overflow: TextOverflow.ellipsis,
+                                border: InputBorder.none,
+                                hintText: "Search for Doctors",
+                                hintStyle: TextStyle(fontSize: 16),
+                                suffixIcon: Icon(Icons.search, size: 26),
                               ),
-                            ],
+                            ),
                           ),
                         ),
-                      );
-                    }).toList(),
-                    const SizedBox(height: 24),
-                  ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+                const SizedBox(height: 16),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: SizedBox(
+                    height: 56,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: categories.length,
+                      itemBuilder: (context, index) {
+                        final item = categories[index];
+                        final isSelected = selectedCategory == index;
+
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() => selectedCategory = index);
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 12),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  item['icon'],
+                                  size: 24,
+                                  color: isSelected
+                                      ? Colors.black
+                                      : Colors.grey,
+                                ),
+                                SizedBox(height: 4),
+                                Text(
+                                  item['label'],
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: isSelected
+                                        ? FontWeight.bold
+                                        : FontWeight.w400,
+                                    color: isSelected
+                                        ? Colors.black
+                                        : Colors.grey,
+                                  ),
+                                ),
+                                const Spacer(),
+                                Container(
+                                  height: 3,
+                                  width: isSelected ? 32 : 0,
+                                  color: isSelected
+                                      ? Colors.black
+                                      : Colors.transparent,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

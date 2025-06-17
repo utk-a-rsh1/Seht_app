@@ -52,11 +52,10 @@ class _PDPScreenState extends State<PDPScreen> {
                   },
                 ),
               ),
-              const SizedBox(height: 180), // reserve space for the white box
+              const SizedBox(height: 180),
             ],
           ),
 
-          // Back Button
           Positioned(
             top: 60,
             left: 16,
@@ -83,7 +82,6 @@ class _PDPScreenState extends State<PDPScreen> {
             ),
           ),
 
-          // Save Button
           Positioned(
             top: 60,
             right: 16,
@@ -110,9 +108,8 @@ class _PDPScreenState extends State<PDPScreen> {
             ),
           ),
 
-          // Carousel Dots
           Positioned(
-            top: 270, // Just before white container starts at 300
+            top: 270,
             left: 0,
             right: 0,
             child: Row(
@@ -189,11 +186,8 @@ class _PDPScreenState extends State<PDPScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16), // spacing before divider
-                  const Divider(
-                    thickness: 1.5,
-                    color: Color(0xffE4E4E4),
-                  ), // you can customize thickness/color
+                  const SizedBox(height: 16),
+                  const Divider(thickness: 1.5, color: Color(0xffE4E4E4)),
 
                   const SizedBox(height: 16),
 
@@ -216,7 +210,6 @@ class _PDPScreenState extends State<PDPScreen> {
                         padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                         child: Row(
                           children: [
-                            // Phone Box
                             Expanded(
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
@@ -254,11 +247,10 @@ class _PDPScreenState extends State<PDPScreen> {
 
                             SizedBox(width: 12),
 
-                            // Website Box
                             Expanded(
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, // ⬅️ Changed from 40 to 16
+                                  horizontal: 16,
                                   vertical: 16,
                                 ),
                                 decoration: BoxDecoration(
@@ -286,7 +278,7 @@ class _PDPScreenState extends State<PDPScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 16), // Optional spacing
+                      SizedBox(height: 16),
                       Divider(thickness: 1, color: Colors.grey.shade300),
                     ],
                   ),
@@ -356,14 +348,13 @@ class _PDPScreenState extends State<PDPScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 16), // Optional spacing
+                      SizedBox(height: 16),
                       Divider(thickness: 1, color: Colors.grey.shade300),
                     ],
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Top row: "Location" and "1km · 10 min away"
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -385,14 +376,12 @@ class _PDPScreenState extends State<PDPScreen> {
                       ),
                       const SizedBox(height: 4),
 
-                      // Address text
                       Text(
                         "Sector 126, Sector 4, Model Town, Sahibzada Ajit Singh Nagar, Punjab 140301",
                         style: TextStyle(color: Colors.grey[600], fontSize: 14),
                       ),
                       const SizedBox(height: 12),
 
-                      // Map container with box decoration
                       Container(
                         height: 200,
                         width: double.infinity,
@@ -422,7 +411,6 @@ class _PDPScreenState extends State<PDPScreen> {
             ),
           ),
 
-          // Fixed Bottom Box with Button
           Positioned(
             left: 0,
             right: 0,
@@ -436,7 +424,7 @@ class _PDPScreenState extends State<PDPScreen> {
                   BoxShadow(
                     color: Colors.black12,
                     blurRadius: 8,
-                    offset: Offset(0, -2), // shadow only at the top
+                    offset: Offset(0, -2),
                   ),
                 ],
               ),
