@@ -34,7 +34,7 @@ class _CategoriesState extends State<Categories> {
             padding: EdgeInsets.only(left: 16, right: 16, top: 48, bottom: 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.max,
               children: [
                 Row(
                   children: [
@@ -146,14 +146,14 @@ class _CategoriesState extends State<Categories> {
                         final item = categories[index];
                         final isSelected = selectedCategory == index;
 
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() => selectedCategory = index);
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.only(right: 40),
+                        return Padding(
+                          padding: EdgeInsets.only(right: 48),
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() => selectedCategory = index);
+                            },
                             child: Column(
-                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 SvgPicture.asset(
                                   item['icon'],
@@ -176,10 +176,10 @@ class _CategoriesState extends State<Categories> {
                                         : Colors.grey,
                                   ),
                                 ),
-                                const Spacer(),
+                                SizedBox(height: 4),
                                 Container(
                                   height: 3,
-                                  width: isSelected ? 48 : 0,
+                                  width: isSelected ? 36 : 0,
                                   color: isSelected
                                       ? Colors.black
                                       : Colors.transparent,
@@ -192,6 +192,7 @@ class _CategoriesState extends State<Categories> {
                     ),
                   ),
                 ),
+
                 const SizedBox(height: 12),
               ],
             ),
@@ -227,6 +228,7 @@ class _CategoriesState extends State<Categories> {
                     ];
 
                     final hospital = hospitals[index];
+                    final isClosed = index >= 2;
 
                     return Padding(
                       padding: const EdgeInsets.symmetric(
@@ -237,13 +239,10 @@ class _CategoriesState extends State<Categories> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.05),
-                              blurRadius: 8,
-                              offset: Offset(0, 4),
-                            ),
-                          ],
+                          border: Border.all(
+                            color: Color(0xffE4E4E4),
+                            width: 1.5,
+                          ),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -275,7 +274,7 @@ class _CategoriesState extends State<Categories> {
                                         child: Container(
                                           padding: const EdgeInsets.symmetric(
                                             horizontal: 10,
-                                            vertical: 4,
+                                            vertical: 6,
                                           ),
                                           decoration: BoxDecoration(
                                             color: Colors.white,
@@ -283,16 +282,32 @@ class _CategoriesState extends State<Categories> {
                                               12,
                                             ),
                                             border: Border.all(
-                                              color: Colors.green,
+                                              color: isClosed
+                                                  ? Color(0xffE4E4E4)
+                                                  : Color(0xffE4E4E4),
+                                              width: 1,
                                             ),
                                           ),
-                                          child: const Text(
-                                            'Open',
-                                            style: TextStyle(
-                                              color: Colors.green,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12,
-                                            ),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Icon(
+                                                Icons.access_time,
+                                                color: Colors.black,
+                                                size: 16,
+                                              ),
+                                              SizedBox(width: 4),
+                                              Text(
+                                                isClosed ? 'Closed' : 'Open',
+                                                style: TextStyle(
+                                                  color: isClosed
+                                                      ? Colors.red
+                                                      : Colors.green,
+                                                  fontWeight: FontWeight.normal,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
@@ -312,7 +327,7 @@ class _CategoriesState extends State<Categories> {
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 16,
+                                      fontSize: 17,
                                     ),
                                   ),
                                   const SizedBox(height: 8),
@@ -320,24 +335,24 @@ class _CategoriesState extends State<Categories> {
                                     children: [
                                       Icon(
                                         Icons.star,
-                                        color: Colors.amber,
-                                        size: 16,
+                                        color: Color(0xffF3BB00),
+                                        size: 20,
                                       ),
                                       SizedBox(width: 4),
                                       Text(
                                         '4.9 rating',
-                                        style: TextStyle(fontSize: 13),
+                                        style: TextStyle(fontSize: 14),
                                       ),
                                       SizedBox(width: 12),
                                       Icon(
                                         Icons.location_on,
-                                        size: 16,
-                                        color: Colors.grey,
+                                        size: 20,
+                                        color: Color(0xff2E467B),
                                       ),
                                       SizedBox(width: 4),
                                       Text(
                                         '800 mtr - 8 min away',
-                                        style: TextStyle(fontSize: 13),
+                                        style: TextStyle(fontSize: 14),
                                       ),
                                     ],
                                   ),
@@ -360,6 +375,7 @@ class _CategoriesState extends State<Categories> {
   }
 }
 
+//xoxo POMPI VEERE!!
 //xoxo POMPI VEERE!!
 //xoxo POMPI VEERE!!
 //xoxo POMPI VEERE!!
