@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'pdp_screen.dart';
 
 class Categories extends StatefulWidget {
   const Categories({super.key});
@@ -198,6 +199,8 @@ class _CategoriesState extends State<Categories> {
             ),
           ),
 
+          const SizedBox(height: 16),
+
           // 🧱 BOTTOM SCROLLABLE SECTION
           Expanded(
             child: CustomScrollView(
@@ -235,132 +238,144 @@ class _CategoriesState extends State<Categories> {
                         horizontal: 16,
                         vertical: 16,
                       ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(
-                            color: Color(0xffE4E4E4),
-                            width: 1.5,
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Stack(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 8,
-                                    right: 8,
-                                    top: 8,
-                                    bottom: 0,
-                                  ),
-                                  child: Stack(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: Image.asset(
-                                          hospital['image']!,
-                                          height: 140,
-                                          width: double.infinity,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 8,
-                                        left: 8,
-                                        child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 10,
-                                            vertical: 6,
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.circular(
-                                              12,
-                                            ),
-                                            border: Border.all(
-                                              color: isClosed
-                                                  ? Color(0xffE4E4E4)
-                                                  : Color(0xffE4E4E4),
-                                              width: 1,
-                                            ),
-                                          ),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Icon(
-                                                Icons.access_time,
-                                                color: Colors.black,
-                                                size: 16,
-                                              ),
-                                              SizedBox(width: 4),
-                                              Text(
-                                                isClosed ? 'Closed' : 'Open',
-                                                style: TextStyle(
-                                                  color: isClosed
-                                                      ? Colors.red
-                                                      : Colors.green,
-                                                  fontWeight: FontWeight.normal,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PDPScreen(doctor: hospital),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(12),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                              color: Color(0xffE4E4E4),
+                              width: 1.5,
+                            ),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Stack(
                                 children: [
-                                  Text(
-                                    hospital['name']!,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 17,
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 16,
+                                      right: 16,
+                                      top: 16,
+                                      bottom: 0,
+                                    ),
+                                    child: Stack(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
+                                          child: Image.asset(
+                                            hospital['image']!,
+                                            height: 140,
+                                            width: double.infinity,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: 8,
+                                          left: 8,
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 10,
+                                              vertical: 6,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                              border: Border.all(
+                                                color: isClosed
+                                                    ? Color(0xffE4E4E4)
+                                                    : Color(0xffE4E4E4),
+                                                width: 1,
+                                              ),
+                                            ),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Icon(
+                                                  Icons.access_time,
+                                                  color: Colors.black,
+                                                  size: 16,
+                                                ),
+                                                SizedBox(width: 4),
+                                                Text(
+                                                  isClosed ? 'Closed' : 'Open',
+                                                  style: TextStyle(
+                                                    color: isClosed
+                                                        ? Colors.red
+                                                        : Colors.green,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  const SizedBox(height: 8),
-                                  const Row(
-                                    children: [
-                                      Icon(
-                                        Icons.star,
-                                        color: Color(0xffF3BB00),
-                                        size: 20,
-                                      ),
-                                      SizedBox(width: 4),
-                                      Text(
-                                        '4.9 rating',
-                                        style: TextStyle(fontSize: 14),
-                                      ),
-                                      SizedBox(width: 12),
-                                      Icon(
-                                        Icons.location_on,
-                                        size: 20,
-                                        color: Color(0xff2E467B),
-                                      ),
-                                      SizedBox(width: 4),
-                                      Text(
-                                        '800 mtr - 8 min away',
-                                        style: TextStyle(fontSize: 14),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 8),
                                 ],
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.all(12),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      hospital['name']!,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 17,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    const Row(
+                                      children: [
+                                        Icon(
+                                          Icons.star,
+                                          color: Color(0xffF3BB00),
+                                          size: 20,
+                                        ),
+                                        SizedBox(width: 4),
+                                        Text(
+                                          '4.9 rating',
+                                          style: TextStyle(fontSize: 14),
+                                        ),
+                                        SizedBox(width: 12),
+                                        Icon(
+                                          Icons.location_on,
+                                          size: 20,
+                                          color: Color(0xff2E467B),
+                                        ),
+                                        SizedBox(width: 4),
+                                        Text(
+                                          '800 mtr - 8 min away',
+                                          style: TextStyle(fontSize: 14),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 8),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );

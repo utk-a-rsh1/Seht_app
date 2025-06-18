@@ -71,7 +71,9 @@ flutter:
     - assets/images/hosp3.jpg
     - assets/images/hosp4.jpg
     - assets/images/hosp5.jpg
-
+    - assets/images/male.jpg
+    - assets/images/feather1.png
+    - assets/images/feather2.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
