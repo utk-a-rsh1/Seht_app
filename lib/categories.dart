@@ -255,7 +255,7 @@ class _CategoriesState extends State<Categories> {
                     bottom: MediaQuery.of(context).viewInsets.bottom + 16,
                   ),
                   child: SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.50,
+                    height: MediaQuery.of(context).size.height * 0.35,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
