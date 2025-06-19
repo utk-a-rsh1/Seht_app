@@ -152,7 +152,6 @@ class _PDPScreenState extends State<PDPScreen> {
                   ),
                 ),
 
-                // Carousel Counter
                 Positioned(
                   bottom: 16,
                   right: 16,
@@ -180,7 +179,6 @@ class _PDPScreenState extends State<PDPScreen> {
             ),
           ),
 
-          // SCROLLABLE BODY
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -236,7 +234,7 @@ class _PDPScreenState extends State<PDPScreen> {
                       Row(
                         children: [
                           Expanded(
-                            flex: 2, // Phone button longer
+                            flex: 2,
                             child: Container(
                               padding: EdgeInsets.symmetric(
                                 horizontal: 16,
@@ -251,8 +249,7 @@ class _PDPScreenState extends State<PDPScreen> {
                                 ),
                               ),
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.start, // Centered content
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Icon(Icons.phone, color: Colors.black87),
                                   SizedBox(width: 16),
@@ -284,8 +281,7 @@ class _PDPScreenState extends State<PDPScreen> {
                                 ),
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment
-                                    .center, // Centered content
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(Icons.language, color: Colors.black87),
                                   SizedBox(width: 8),
@@ -514,7 +510,6 @@ class LocationCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
 
-          /// Address Text
           const Text(
             "Sector 126, Sector 4, Model Town, Sahibzada Ajit Singh, Nagar, Punjab 140301",
             style: TextStyle(fontSize: 14, color: Color(0xff687483)),
@@ -645,14 +640,12 @@ class ReviewSection extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
 
-                      /// Review Text
                       const Text(
                         "Thanks to Dr. Gupta for his specialise treatment. Polite Nature, Perfect Treatment, Satisfied.",
                         style: TextStyle(fontSize: 14),
                       ),
                       const SizedBox(height: 6),
 
-                      /// Show more link
                       Text(
                         "Show more",
                         style: TextStyle(
@@ -664,7 +657,6 @@ class ReviewSection extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
 
-                      /// Profile
                       Row(
                         children: [
                           ClipRRect(
@@ -695,13 +687,10 @@ class ReviewSection extends StatelessWidget {
 
         const SizedBox(height: 24),
 
-        /// Show All Reviews Button
         Container(
-          margin: const EdgeInsets.symmetric(
-            horizontal: 8,
-          ), // smaller side margins
+          margin: const EdgeInsets.symmetric(horizontal: 8),
           padding: const EdgeInsets.symmetric(vertical: 12),
-          width: double.infinity, // full width
+          width: double.infinity,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
@@ -726,7 +715,6 @@ class NearbyDoctorSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        /// Section title
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 8),
           child: Text(
@@ -736,7 +724,6 @@ class NearbyDoctorSection extends StatelessWidget {
         ),
         const SizedBox(height: 12),
 
-        /// Scrollable cards
         SizedBox(
           height: 120,
           child: ListView.separated(
@@ -832,3 +819,15 @@ class NearbyDoctorSection extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+//XOXO POMPI VEERE!!
+//XOXO POMPI VEERE!!
+//XOXO POMPI VEERE!!
+//XOXO POMPI VEERE!!

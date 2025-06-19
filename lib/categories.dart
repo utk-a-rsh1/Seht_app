@@ -23,6 +23,377 @@ class _CategoriesState extends State<Categories> {
 
   final List<Map<String, dynamic>> doctors = [];
 
+  void _showSearchBottomSheet() {
+    final FocusNode _searchFocusNode = FocusNode();
+    final TextEditingController _searchController = TextEditingController();
+    bool _showClear = false;
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: const Color(0xffF7F7F7),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        Future.delayed(const Duration(milliseconds: 100), () {
+          FocusScope.of(context).requestFocus(_searchFocusNode);
+        });
+
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            _searchController.addListener(() {
+              setModalState(() {
+                _showClear = _searchController.text.isNotEmpty;
+              });
+            });
+
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                  top: 16,
+                  bottom: 24,
+                ),
+                child: AnimatedPadding(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeOut,
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.50,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: Container(
+                            width: 40,
+                            height: 4,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(2),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "Search",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => Navigator.pop(context),
+                              child: const Text(
+                                "Cancel",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: Color(0xffE4E4E4),
+                              width: 1.5,
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              const SizedBox(
+                                width: 60,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [Icon(Icons.arrow_back, size: 24)],
+                                ),
+                              ),
+                              Expanded(
+                                child: TextField(
+                                  controller: _searchController,
+                                  focusNode: _searchFocusNode,
+                                  decoration: const InputDecoration(
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.symmetric(
+                                      vertical: 14,
+                                    ),
+                                    border: InputBorder.none,
+                                    hintText:
+                                        "Search for Doctors, Symptoms etc.",
+                                    hintStyle: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              AnimatedOpacity(
+                                opacity: _showClear ? 1.0 : 0.0,
+                                duration: const Duration(milliseconds: 200),
+                                child: _showClear
+                                    ? GestureDetector(
+                                        onTap: () {
+                                          _searchController.clear();
+                                          setModalState(() {
+                                            _showClear = false;
+                                          });
+                                        },
+                                        child: const Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 12,
+                                          ),
+                                          child: Icon(
+                                            Icons.cancel_outlined,
+                                            color: Colors.black,
+                                            size: 16,
+                                          ),
+                                        ),
+                                      )
+                                    : const SizedBox(width: 40),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        const Text(
+                          "Recent searches",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Expanded(
+                          child: ListView(
+                            padding: EdgeInsets.zero,
+                            children: [
+                              _recentSearchRow("Heart pain"),
+                              _recentSearchRow("Head ache"),
+                              _recentSearchRow("Akash Kumar"),
+                              _recentSearchRow("Vikas Kumar"),
+                              _recentSearchRow("likas Kumar"),
+                              _recentSearchRow("puskas Kumar"),
+                              _recentSearchRow("hichki Kumar"),
+                              _recentSearchRow("dhikchik Kumar"),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  static Widget _recentSearchRow(String text) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(6),
+            width: 45,
+            height: 45,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: const Icon(Icons.access_time, size: 18, color: Colors.black),
+          ),
+          const SizedBox(width: 12),
+          Text(text, style: const TextStyle(fontSize: 16)),
+        ],
+      ),
+    );
+  }
+
+  void _showLocationBottomSheet() {
+    final FocusNode _locationFocusNode = FocusNode();
+    final TextEditingController _locationController = TextEditingController();
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: const Color(0xffF7F7F7),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        Future.delayed(const Duration(milliseconds: 100), () {
+          FocusScope.of(context).requestFocus(_locationFocusNode);
+        });
+
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return SafeArea(
+              child: SingleChildScrollView(
+                child: AnimatedPadding(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeOut,
+                  padding: EdgeInsets.only(
+                    left: 16,
+                    right: 16,
+                    top: 16,
+                    bottom: MediaQuery.of(context).viewInsets.bottom + 16,
+                  ),
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.50,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: Container(
+                            width: 40,
+                            height: 4,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(2),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "Location",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => Navigator.pop(context),
+                              child: const Text(
+                                "Cancel",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: Color(0xffE4E4E4),
+                              width: 1.5,
+                            ),
+                          ),
+                          child: TextField(
+                            controller: _locationController,
+                            focusNode: _locationFocusNode,
+                            onChanged: (_) => setState(() {}),
+                            decoration: InputDecoration(
+                              isDense: true,
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 14,
+                              ),
+                              border: InputBorder.none,
+                              hintText:
+                                  "Search for Country, Territory, State, City etc.",
+                              hintStyle: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal,
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.arrow_back,
+                                size: 24,
+                              ),
+                              suffixIcon: _locationController.text.isNotEmpty
+                                  ? GestureDetector(
+                                      onTap: () {
+                                        _locationController.clear();
+                                        setState(() {});
+                                      },
+                                      child: const Icon(
+                                        Icons.cancel_outlined,
+                                        size: 16,
+                                        color: Colors.black,
+                                      ),
+                                    )
+                                  : null,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 14,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: Color(0xffE4E4E4),
+                                width: 1.5,
+                              ),
+                            ),
+                            child: Row(
+                              children: const [
+                                Icon(
+                                  Icons.my_location,
+                                  color: Color(0xff2E467B),
+                                ),
+                                SizedBox(width: 12),
+                                Text(
+                                  "Use current location",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xff2E467B),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 40),
+                        const Center(
+                          child: Text(
+                            "No recent searches",
+                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,8 +431,6 @@ class _CategoriesState extends State<Categories> {
                   ],
                 ),
                 const SizedBox(height: 12),
-
-                // Search bar
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   decoration: BoxDecoration(
@@ -78,33 +447,37 @@ class _CategoriesState extends State<Categories> {
                   ),
                   child: Row(
                     children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 10,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[100],
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: const Row(
-                          children: [
-                            Icon(
-                              Icons.location_on,
-                              color: Colors.grey,
-                              size: 16,
-                            ),
-                            SizedBox(width: 4),
-                            Text(
-                              "Noida",
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
+                      GestureDetector(
+                        onTap: _showLocationBottomSheet,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 10,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.grey[100],
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: const Row(
+                            children: [
+                              Icon(
+                                Icons.location_on,
+                                color: Colors.grey,
+                                size: 16,
                               ),
-                            ),
-                          ],
+                              SizedBox(width: 4),
+                              Text(
+                                "Noida",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
+
                       const SizedBox(width: 10),
                       Container(width: 1, height: 20, color: Color(0xffE4E4E4)),
                       const SizedBox(width: 10),
@@ -114,17 +487,22 @@ class _CategoriesState extends State<Categories> {
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Center(
-                            child: TextField(
-                              textAlignVertical: TextAlignVertical.center,
-                              decoration: InputDecoration(
-                                isDense: true,
-                                contentPadding: EdgeInsets.symmetric(
-                                  vertical: 14,
+                            child: GestureDetector(
+                              onTap: _showSearchBottomSheet,
+                              child: AbsorbPointer(
+                                child: TextField(
+                                  textAlignVertical: TextAlignVertical.center,
+                                  decoration: InputDecoration(
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.symmetric(
+                                      vertical: 15,
+                                    ),
+                                    border: InputBorder.none,
+                                    hintText: "Search for Doctors",
+                                    hintStyle: TextStyle(fontSize: 16),
+                                    suffixIcon: Icon(Icons.search, size: 26),
+                                  ),
                                 ),
-                                border: InputBorder.none,
-                                hintText: "Search for Doctors",
-                                hintStyle: TextStyle(fontSize: 16),
-                                suffixIcon: Icon(Icons.search, size: 26),
                               ),
                             ),
                           ),
@@ -133,9 +511,7 @@ class _CategoriesState extends State<Categories> {
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 16),
-
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8),
                   child: SizedBox(
@@ -193,15 +569,11 @@ class _CategoriesState extends State<Categories> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 12),
               ],
             ),
           ),
-
           const SizedBox(height: 16),
-
-          // 🧱 BOTTOM SCROLLABLE SECTION
           Expanded(
             child: CustomScrollView(
               slivers: [
@@ -295,9 +667,7 @@ class _CategoriesState extends State<Categories> {
                                               borderRadius:
                                                   BorderRadius.circular(12),
                                               border: Border.all(
-                                                color: isClosed
-                                                    ? Color(0xffE4E4E4)
-                                                    : Color(0xffE4E4E4),
+                                                color: Color(0xffE4E4E4),
                                                 width: 1,
                                               ),
                                             ),
@@ -390,7 +760,8 @@ class _CategoriesState extends State<Categories> {
   }
 }
 
-//xoxo POMPI VEERE!!
-//xoxo POMPI VEERE!!
-//xoxo POMPI VEERE!!
-//xoxo POMPI VEERE!!
+
+//XOXO POMPI VEERE!!
+//XOXO POMPI VEERE!!
+//XOXO POMPI VEERE!!
+//XOXO POMPI VEERE!!
