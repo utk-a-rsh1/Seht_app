@@ -21,6 +21,51 @@ class _PDPScreenState extends State<PDPScreen> {
     'assets/images/hosp4.jpg',
   ];
 
+  List<Widget> _availabilityRows() {
+    final days = {
+      'Monday': '10am–5pm',
+      'Tuesday': '10am–5pm',
+      'Wednesday': '10am–5pm',
+      'Thursday': '10am–5pm',
+      'Friday': '10am–5pm',
+      'Saturday': '10am–5pm',
+      'Sunday': 'Closed',
+    };
+
+    return days.entries.map((e) {
+      final isSunday = e.key == 'Sunday';
+      return Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  e.key,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: isSunday ? Colors.red : Colors.black,
+                  ),
+                ),
+                Text(
+                  e.value,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                    color: isSunday ? Colors.red : Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Divider(color: Color(0xffE4E4E4), thickness: 1.5),
+        ],
+      );
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -273,7 +318,73 @@ class _PDPScreenState extends State<PDPScreen> {
                           ),
                           SizedBox(height: 16),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              showModalBottomSheet(
+                                context: context,
+                                backgroundColor: Color(0xffF7F7F7),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(20),
+                                  ),
+                                ),
+                                builder: (_) {
+                                  return SafeArea(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16),
+                                      child: SingleChildScrollView(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Container(
+                                              width: 40,
+                                              height: 4,
+                                              margin: const EdgeInsets.only(
+                                                bottom: 12,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: Colors.black,
+                                                borderRadius:
+                                                    BorderRadius.circular(2),
+                                              ),
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                const Text(
+                                                  "Doctor’s availability",
+                                                  style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () =>
+                                                      Navigator.pop(context),
+                                                  child: const Text(
+                                                    "Cancel",
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.grey,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 24),
+                                            ..._availabilityRows(),
+                                            const SizedBox(height: 24),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
                             child: Container(
                               padding: EdgeInsets.symmetric(
                                 horizontal: 16,
